@@ -38,7 +38,55 @@ const Register = async (req, res) => {
     });
   }
 };
-const Login = async (req, res) => {};
+const Login = async (req, res) => {
+  // console.log(req.body);
+  // console.log(req.headers);
+
+  try {
+    const { email, password } = req.body;
+    const checkUserIsRegistered = await User.findOne({ email });
+
+    if (!checkUserIsRegistered) {
+      return res.status(404).json({
+        message: "you have to register first",
+      });
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      checkUserIsRegistered.password,
+    );
+
+    if (!isPasswordCorrect) {
+      return res.status(401).json({
+        message: "password is incorrect",
+      });
+    }
+    const token = jwt.sign(
+      { id: checkUserIsRegistered._id },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      },
+    );
+
+    res.cookie("token", token);
+
+    res.status(200).json({
+      message: "user is logged in successfully",
+      user: {
+        id: checkUserIsRegistered._id,
+        name: checkUserIsRegistered.name,
+        email: checkUserIsRegistered.email,
+        role: checkUserIsRegistered.role,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
 const GetProfile = async (req, res) => {
   const allUserData = await User.find();
   res.status(200).json({
