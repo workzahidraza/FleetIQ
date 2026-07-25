@@ -10,5 +10,5 @@ app.use(cookieParser());
 
 app.use("/check", healthRouter);
 app.use("/api", authRouter);
-app.use("/vehicle", vehicleRouter);
+app.use("/api/vehicle", vehicleRouter);
 module.exports = app;
