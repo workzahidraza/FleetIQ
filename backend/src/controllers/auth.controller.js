@@ -44,8 +44,8 @@ const Login = async (req, res) => {
 
   try {
     const { email, password } = req.body;
-    const checkUserIsRegistered = await User.findOne({ email });
-
+    const checkUserIsRegistered = await User.findOne({ email:email });
+   
     if (!checkUserIsRegistered) {
       return res.status(404).json({
         message: "you have to register first",
