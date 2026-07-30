@@ -16,7 +16,7 @@ const driverSchema = new mongoose.Schema(
       enum: ["available", "on delivery", "on leave"],
       default: "available",
     },
-    asssignedVehicleNumber: {
+    assignedVehicleNumber: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Vehicle",
     },
@@ -26,6 +26,6 @@ const driverSchema = new mongoose.Schema(
   },
 );
 
-const Driver = mongoose.model("dirver", driverSchema);
+const Driver = mongoose.model("Dirver", driverSchema);
 
 module.exports = Driver;

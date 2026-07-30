@@ -70,7 +70,7 @@ Complete the remaining Vehicle CRUD APIs.
 ### APIs
 
 * [x] Create Vehicle
-* [ ] Get All Vehicles
+* [x] Get All Vehicles
 * [ ] Get Single Vehicle
 * [ ] Update Vehicle
 * [ ] Delete Vehicle
